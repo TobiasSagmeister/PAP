@@ -86,11 +86,13 @@ int main()
     // while user does not provide "Quit" as input
     while(true)
     {
-        //4509472140549006
+        //5486965694025434
         cout << "Eingabe der Kreditkartennummer ('Quit' zum Beenden):" << endl;
         
         // Read in input from console
         cin >> input;
+        
+        cout << "Eingabe: " << input << endl;
         
         // Check input for breaking while loop
         if(input == "Quit") {
@@ -105,8 +107,7 @@ int main()
         
         // If there is a valid number
         if(str.c_str() != endp) {
-            cout << "Eingabe: " << input << endl;
-            cout << "Pruefe: " << input.substr(0, input.length() - 1) << "x" << endl;
+            cout << "Pruefe: " << creditCardNumber / 10 << "x" << endl;
             
             // Get check digit for number
             int checkDigit = pap(creditCardNumber);
