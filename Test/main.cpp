@@ -1,5 +1,7 @@
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <stdio.h>
 
 using namespace std;
 
@@ -77,25 +79,6 @@ int pap(unsigned long creditCardNumber) {
     return checkDigit;
 }
 
-unsigned long parseAndValidateCreditCardNumber(string input) {
-    // Stores the numbers of digit which are converted
-    string::size_type digitCounter;
-    try {
-        // Converts a string into a long
-        unsigned long number = stoul(input, &digitCounter, 0);
-        
-        // Check if there are enough numbers for a credit card number
-        if(digitCounter == CREDIT_CARD_NUMBERS) {
-            return number;
-        }
-    } catch (exception &e) {
-        //This could happen if conversion failures due to wrong input
-        cerr << "Error in conversion: " << e.what() << endl;
-    }
-    
-    return -1;
-}
-
 int main()
 {
     string input;
@@ -114,11 +97,14 @@ int main()
             break;
         }
         
-        // Parsed credit card number to proceed
-        unsigned long creditCardNumber = parseAndValidateCreditCardNumber(input);
+        std::string const& str = input;
+        char * endp;
+        
+        // Parse credit card number from input temp reference to proceed
+        unsigned long creditCardNumber = strtoul(str.c_str(), &endp, 0);
         
         // If there is a valid number
-        if(creditCardNumber != -1) {
+        if(str.c_str() != endp) {
             cout << "Eingabe: " << input << endl;
             cout << "Pruefe: " << input.substr(0, input.length() - 1) << "x" << endl;
             

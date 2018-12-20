@@ -24,7 +24,7 @@
 
 /* Begin PBXFileReference section */
 		7FC943731FD833A600DC2DE7 /* PAP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PAP; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FC943761FD833A600DC2DE7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		7FC943761FD833A600DC2DE7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; usesTabs = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
