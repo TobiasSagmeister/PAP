@@ -1,35 +1,35 @@
+
 #include <string>
 #include <iostream>
-#include <cstdlib>
-#include <stdio.h>
+#include <sstream>
 
 using namespace std;
 
 const int CREDIT_CARD_NUMBERS = 16;
 
 int pap(unsigned long creditCardNumber) {
-    printf("%-4s %-4s %-4s\n", "Nr.", "Gew.", "Prod.");
+    cout << "Nr." << "  " << "Gew." << "  " << "Prod." << endl;
     
     //Holder for the products
-    int products[CREDIT_CARD_NUMBERS - 1];
+    int products[CREDIT_CARD_NUMBERS];
     
     //While there is a rest of credit card number, take i as indicator for factoring
-    for(int i = 0; creditCardNumber; i++) {
+    for(int i = 0; i < CREDIT_CARD_NUMBERS; i++) {
         int digit = creditCardNumber % 10;
         
-        int product = digit;
+        int product = 0;
         
         // Take rest of module (0 or 1) + 1 for factor
         int factor = i % 2 + 1;
         
         // First digit is checked digit, so skip that
         if(i == 0) {
-            printf("%-4s %-4d %-4s\n", "P", factor, "-");
+            cout << "P" << "    " << factor << "     " << "-" << endl;
         } else {
             // Multiply digit
-            product *= factor;
+            product = digit * factor;
             
-            printf("%-4d %-4d %-4d\n", digit, factor, product);
+            cout << digit << "    " << factor << "     " << product << endl;
 
             // Take care if there product is bigger than 9
             if (product > 9) {
@@ -47,10 +47,10 @@ int pap(unsigned long creditCardNumber) {
                 
                 product = productSum;
             }
-            
-            //Store product in holder
-            products[i - 1] = product;
         }
+        
+        //Store product in holder
+        products[i] = product;
         
         //Go further with divided credit card number
         creditCardNumber /= 10;
@@ -58,8 +58,8 @@ int pap(unsigned long creditCardNumber) {
     
     // Build product digit sum
     int productSum = 0;
-    for (int product : products) {
-        productSum += product;
+    for (int i= 0; i < CREDIT_CARD_NUMBERS; i++) {
+        productSum += products[i];
     }
     
     cout << "Quersumme: " << productSum << endl;
@@ -99,27 +99,20 @@ int main()
             break;
         }
         
-        std::string const& str = input;
-        char * endp;
-        
         // Parse credit card number from input temp reference to proceed
-        unsigned long creditCardNumber = strtoul(str.c_str(), &endp, 0);
+        unsigned long creditCardNumber;
+        stringstream(input) >> creditCardNumber;
         
-        // If there is a valid number
-        if(str.c_str() != endp) {
-            cout << "Pruefe: " << creditCardNumber / 10 << "x" << endl;
-            
-            // Get check digit for number
-            int checkDigit = pap(creditCardNumber);
-            
-            // Check last digit of number for equality with check digit
-            if(checkDigit == creditCardNumber % 10) {
-                cout << "Die eingegebene Kreditkartennummer war korrekt." << endl;
-            } else {
-                cout << "Die eingegebene Kreditkartennummer war nicht korrekt." << endl;
-            }
+        cout << "Pruefe: " << creditCardNumber / 10 << "x" << endl;
+        
+        // Get check digit for number
+        int checkDigit = pap(creditCardNumber);
+        
+        // Check last digit of number for equality with check digit
+        if(checkDigit == creditCardNumber % 10) {
+            cout << "Die eingegebene Kreditkartennummer war korrekt." << endl;
         } else {
-            cout << "Eingabe war fehlerhaft!" << endl;
+            cout << "Die eingegebene Kreditkartennummer war nicht korrekt." << endl;
         }
         
         cout << "--------------------------------------------------------" << endl;
